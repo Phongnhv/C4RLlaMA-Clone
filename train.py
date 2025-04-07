@@ -227,18 +227,18 @@ def train(
         train_data = train_data.filter(lambda example: len(example['labels']) > 1)
         val_data = None
 
-    #optimizer = Lion(
-    #    model.parameters(),
-    #    lr=learning_rate,
-    #    weight_decay=0.0,
-    #    use_triton=True
-    #)
-
-    optimizer = AdamW(
-    model.parameters(),
-    lr=learning_rate,
-    weight_decay=0.0
+    optimizer = Lion(
+        model.parameters(),
+        lr=learning_rate,
+        weight_decay=0.0,
+        use_triton=False
     )
+
+    #optimizer = AdamW(
+    #model.parameters(),
+    #lr=learning_rate,
+    #weight_decay=0.0
+    #)
 
 
     len_dataset = len(train_data)

@@ -30,8 +30,8 @@ def train(
     base_model: str = "", 
     data_path: str = "yahma/alpaca-cleaned",
     output_dir: str = "./lora-alpaca",
-    batch_size: int = 128,
-    micro_batch_size: int = 4,
+    batch_size: int = 8,
+    micro_batch_size: int = 1,
     num_epochs: int = 3,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
@@ -291,8 +291,8 @@ def train(
     )
     model.config.use_cache = False
 
-    if torch.__version__ >= "2" and sys.platform != "win32":
-        model = torch.compile(model)
+    #if torch.__version__ >= "2" and sys.platform != "win32":
+    #    model = torch.compile(model)
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
 

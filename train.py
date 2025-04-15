@@ -8,6 +8,7 @@ import time
 from dataclasses import dataclass,field
 import torch
 import transformers
+from transformers import BitsAndBytesConfig
 from utils.BalanceTrainer import BalanceTrainer
 from datasets import load_dataset, concatenate_datasets
 from lion_pytorch import Lion
@@ -95,9 +96,17 @@ def train(
 
     device_map = "auto"
 
+    bnb_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_quant_type="nf4"
+    )
+
+
     model = AutoModelForCausalLM.from_pretrained(
         base_model,
-        torch_dtype=torch.bfloat16,
+        quantization_config=bnb_config,
         device_map=device_map,
     )
 

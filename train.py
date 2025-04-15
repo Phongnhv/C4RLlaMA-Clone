@@ -30,7 +30,7 @@ def train(
     base_model: str = "", 
     data_path: str = "yahma/alpaca-cleaned",
     output_dir: str = "./lora-alpaca",
-    batch_size: int = 8,
+    batch_size: int = 4,
     micro_batch_size: int = 1,
     num_epochs: int = 3,
     learning_rate: float = 3e-4,
